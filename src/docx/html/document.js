@@ -16,12 +16,14 @@ export default class Document extends Converter {
     contentStyle.width = '100%';
     contentStyle.paddingTop = '20px';
     contentStyle.overflow = 'auto';
+    contentStyle.tabSize = '3rem'
 
     let style = this.doc.createStyle('*');
     style.margin = '0';
     style.border = '0';
     style.padding = '0';
     style.boxSizing = 'border-box';
+    style.whiteSpace = 'pre-wrap';
 
     style = this.doc.createStyle('table');
     style.width = '100%';
