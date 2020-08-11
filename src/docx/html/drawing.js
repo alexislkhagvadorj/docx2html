@@ -4,6 +4,7 @@ import Style from './style/converter';
 export default class Drawing extends Converter {
   convertStyle(el) {
     super.convertStyle(...arguments);
+    if (this.wordModel.getStyleId == undefined) el.setAttribute('class', 'Drawing');
     const style = this.wordModel.getDirectStyle();
     style && style.parse([new this.constructor.Properties(el.style, this)]);
   }

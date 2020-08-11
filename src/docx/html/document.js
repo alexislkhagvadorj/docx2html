@@ -37,9 +37,9 @@ export default class Document extends Converter {
     style.position = 'relative';
     style.zIndex = 0;
 
-    style = this.doc.createStyle('p:empty:before');
-    style.content = '""';
-    style.display = 'inline-block';
+    // style = this.doc.createStyle('p:empty:before');
+    // style.content = '""';
+    // style.display = 'inline-block';
 
     style = this.doc.createStyle('ul');
     style.listStyle = 'none';
@@ -143,46 +143,7 @@ export default class Document extends Converter {
             return html.join('\r\n');
           },
           _html() {
-            const divs = this.querySelectorAll('p>div, span>div');
-            if (divs.length == 0) return this.outerHTML;
-
-            /**
-            * illegal <p> <div/> </p>
-            * DOM operation directly in onload
-            */
-            const divcontainer = doc.createElement('div'); let
-              uid = 0;
-            divcontainer.id = 'divcontainer';
-            divcontainer.style.display = 'none';
-            this.appendChild(divcontainer);
-            for (let i = divs.length - 1; i > -1; i--) {
-              const div = divs[i];
-              const parent = div.parentNode;
-
-              if (!div.id) div.id = `_z${++uid}`;
-
-              if (!parent.id) parent.id = `_y${uid}`;
-
-              div.setAttribute('data-parent', parent.id);
-              div.setAttribute('data-index', indexOf(div, parent.childNodes));
-
-              divcontainer.appendChild(divs[i]);
-            }
-
-            const html = `${this.outerHTML}\n\r<script>(${this._transformer.toString()})();</script>`;
-            this._transformer();
-            return html;
-          },
-          _transformer() {
-            const a = document.querySelector('#divcontainer');
-            for (let divs = a.childNodes, i = divs.length - 1; i > -1; i--) {
-              const div = divs[i];
-              const parentId = div.getAttribute('data-parent');
-              const index = parseInt(div.getAttribute('data-index'));
-              const parent = document.querySelector(`#${parentId}`);
-              parent.insertBefore(div, parent.childNodes[index]);
-            }
-            a.parentNode.removeChild(a);
+            return this.outerHTML;
           },
         });
 
