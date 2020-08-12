@@ -142,7 +142,7 @@ Table.CellProperties = class CellProperties extends Style.Properties {
   }
 
   shd(x) {
-    this.style.backgroundColor = x;
+    if (x != '#000000') this.style.backgroundColor = x;
   }
 
   gridSpan(x) {
