@@ -162,7 +162,7 @@ export default class Document extends Converter {
         const relStyles = {}; const
           styles = {};
 
-        return Object.assign(selfConverter[$tool.isNode ? 'nodefy' : 'browserify'](doc, stylesheet, opt), {
+        return Object.assign(selfConverter['browserify'](doc, stylesheet, opt), {
           createStyle(selector) {
             if (styles[selector]) return styles[selector];
             const rules = stylesheet.cssRules; const len = rules.length;
@@ -181,7 +181,7 @@ export default class Document extends Converter {
           },
         });
       }(doc));
-    }($tool.isNode ? createDocument() : document));
+    }(document));
   }
 
   static nodefy(doc, stylesheet, opt) {
@@ -264,13 +264,3 @@ export default class Document extends Converter {
     });
   }
 }
-
-(function (isNode, m) {
-  if (!isNode) return;
-
-  createDocument = require(m).jsdom;
-  const window = createDocument().defaultView;
-
-  global.btoa = window.btoa;
-  CSSStyleDeclaration = window.CSSStyleDeclaration;
-}($tool.isNode, 'jsdom'));

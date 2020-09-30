@@ -1,5 +1,5 @@
 import docx4js from 'docx4js';
-import converters from './docx/html/factory';
+import converters from '../lib/docx/html/factory';
 
 export default function docx2html(file, opt) {
   return docx4js.load(file)

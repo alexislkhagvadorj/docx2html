@@ -3,8 +3,9 @@
 <head>
   <script src="index.js"></script>
   <script>
+    // var DOCX2HTML = require('docx2html');
     function test(input){
-      require("docx2html")(input.files[0]).then(function(converted){
+      DOCX2HTML(input.files[0]).then(function(converted){
         text.value=converted.toString()
       })
     }
